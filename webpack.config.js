@@ -1,3 +1,4 @@
+const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: __dirname + '/dist'
+        /*contentBase: __dirname + '/dist'*/
+        historyApiFallback: true
     },
     plugins: [
         new HTMLPlugin({
@@ -30,7 +32,13 @@ module.exports = {
                     options: {
                         presets: ['@babel/preset-env']
                     }
-                }
+                },
+
+                test: /\.css$/,
+                use:[
+                    {loader: 'style-loader'}, {loader: 'css-loader'}
+                ]
+
             }
         ]
     }
